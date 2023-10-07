@@ -22,5 +22,3 @@ piezas = [
 def pieza_aleatoria():
     i = random.randrange(len(piezas))
     return piezas[i]
-
-print(pieza_aleatoria())
