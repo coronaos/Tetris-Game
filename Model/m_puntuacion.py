@@ -8,7 +8,7 @@ class Punts:
         return self.puntos
 
     def puntuacion_maxima(self):
-        return (true if self.puntos >= self.maximo else false)
+        return (True if self.puntos >= self.maximo else False)
 
 
     def get_puntos(self):
