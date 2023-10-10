@@ -1,12 +1,12 @@
 def leerFichero():
-    with open('/Users/matieslopezalarcon/Documents/GitHub/Tetris-Game/historial.txt') as f:
+    with open('historial.txt') as f:
         texto = f.readlines()
         f.close()
         return texto
 
 
 def escribirFichero(nombre, puntuacion):
-    f = open('/Users/matieslopezalarcon/Documents/GitHub/Tetris-Game/historial.txt', 'a+')
+    f = open('historial.txt', 'a+')
     f.write("\n"+puntuacion+" "+nombre)
     f.close()
 
