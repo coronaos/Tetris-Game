@@ -7,7 +7,7 @@ import Vista.v_main as vista
 
 def playGame():
     pieza_actual = ficha.pieza_aleatoria()
-    pos_pieza = [0,5]
+    pos_pieza = [19,5]
     tablero = Tablero(20,10)
     puntuacio = Puntuacion(1000)
     tablero.print_tablero()
@@ -15,15 +15,15 @@ def playGame():
     while(movimiento_jugador!="q" or tablero.tablero_lleno(pieza_actual,pos_pieza)):
         if(movimiento_jugador == "a"):
             #left
-            pos_pieza = tablero.mover_izquierda(pieza_actual, pos_pieza)
+            tablero.mover_izquierda(pieza_actual, pos_pieza)
             pass
         elif(movimiento_jugador == "d"):
             #right
-            pos_pieza = tablero.mover_derecha(pieza_actual, pos_pieza)
+            tablero.mover_derecha(pieza_actual, pos_pieza)
             pass
         elif(movimiento_jugador == "s"):
             #down
-            pos_pieza = tablero.mover_abajo(pieza_actual, pos_pieza)
+            new_pos = tablero.mover_abajo(pieza_actual, pos_pieza)
             pass
         elif(movimiento_jugador == "k"):
             #rotate
@@ -41,5 +41,12 @@ def playGame():
             puntuacio.sumar_puntos(20 * num_filas_eliminas)
             tablero.print_tablero()
 
+        if new_pos == pos_pieza:
+            pieza_actual = ficha.pieza_aleatoria()
+            pos_pieza = [19,5]
+        else:
+            pos_pieza = new_pos
+
+        movimiento_jugador = input()
     ficheros.escribirFichero(vista.nombreJugador, puntuacio.get_puntos())
     print("Thank you for playing!")
