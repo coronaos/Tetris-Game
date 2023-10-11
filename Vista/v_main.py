@@ -14,12 +14,18 @@ if __name__ == "__main__":
     ranking = controlador.ficheros.rankingFichero()
     print("TETRIS GAME")
     print("by Maties & Esther")
-    print("Press P to start the game")
-    print("Press a,s,d to move the piece to the left, down and right position")
     print("RANKING TOP 3!")
     print("--------------")
-    print(ranking)
+    for r in ranking:
+        print(r)
+    print("\n \n")
+    print("Press P to start the game")
+    print("Press a,s,d to move the piece to the left, down and right position")
     tecla = input()
+
+
+
+
     if(tecla == "p"):
         print("Introduce a three letter name")
         nombreJugador = input()

@@ -2,7 +2,14 @@ class Tablero:
     def __init__(self, filas, columnas):
         self.filas = filas
         self.columnas = columnas
-        self.tablero = [[0] * columnas for _ in range(filas)]
+        #self.tablero = [[0] * columnas for _ in range(filas)]
+        self.tablero = [[0 for x in range(22)] for y in range(10)]
+        for i in range(22):
+            self.tablero[i][0] = 1
+        for i in range(22):
+            self.tablero[22-1][i] = 1
+        for i in range(22):
+            self.tablero[i][22-1] = 1
 
     # donde pieza sería una del array y posicion la fila y columna donde colocamos
     def colocar_pieza(self, pieza, posicion):
@@ -71,15 +78,20 @@ class Tablero:
     def overlap_check(self, pieza, posicion):
         curr_piece_size_x = len(pieza)
         curr_piece_size_y = len(pieza[0])
+        print("aaaa")
+        print(self.tablero)
         for i in range(curr_piece_size_x):
             for j in range(curr_piece_size_y):
                 if self.tablero[posicion[0] + i][posicion[1] + j] == 1 and pieza[i][j] == 1:
                     return False
         return True
     def print_tablero(self):
+        """
+
         for i in range(self.filas -1,-1,-1):
             for j in range (self.columnas-1, -1, -1):
                 print(self.tablero[i][j])
-            print("\n")
 
+            print("\n")
+        """
 

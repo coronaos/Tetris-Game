@@ -1,7 +1,7 @@
 from Model.m_tablero import Tablero
 import Model.m_fichas as ficha
 import Model.m_ficheros as ficheros
-import Model.m_puntuacion as Puntuacion
+from Model.m_puntuacion import Punts
 import Vista.v_main as vista
 
 
@@ -9,8 +9,10 @@ def playGame():
     pieza_actual = ficha.pieza_aleatoria()
     pos_pieza = [19,5]
     tablero = Tablero(20,10)
-    puntuacio = Puntuacion(1000)
+    print("tablero")
+    puntuacio = Punts("1000")
     tablero.print_tablero()
+
     movimiento_jugador = input()
     while(movimiento_jugador!="q" or tablero.tablero_lleno(pieza_actual,pos_pieza)):
         if(movimiento_jugador == "a"):
