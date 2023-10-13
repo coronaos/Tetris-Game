@@ -115,7 +115,7 @@ class Tablero:
         """
 
         for x in self.tablero:
-            visual = list
+            visual = []
             for y in x:
                 if(y == 0):
                     visual.append("  ")
