@@ -3,8 +3,8 @@ class Tablero:
     def __init__(self, filas, columnas):
         self.filas = filas
         self.columnas = columnas
-        #self.tablero = [[0] * columnas for _ in range(filas)]
-        self.tablero = [[0 for x in range(10)] for y in range(20)]
+        self.tablero = [[0] * columnas for _ in range(filas)]
+        #self.tablero = [[0 for x in range(columnas)] for y in range(filas)]
 
 
     # donde pieza sería una del array y posicion la fila y columna donde colocamos
@@ -38,6 +38,10 @@ class Tablero:
         if self.overlap_check(pieza, posicion):
             print("No se puede mover abajo")
             return posicion
+        if filas == (self.filas - len(pieza)):
+            self.borrar_pieza(pieza, posicion)
+            self.colocar_pieza(pieza, [filas, columnas])
+            return posicion
         else:
             self.borrar_pieza(pieza, posicion)
             self.colocar_pieza(pieza, [filas, columnas])
@@ -46,7 +50,7 @@ class Tablero:
     def mover_derecha(self, pieza, posicion):
         filas = posicion[0]
         columnas = posicion[1] + 1
-        if self.overlap_check(pieza, posicion):
+        if self.overlap_check(pieza, posicion) or columnas == self.columnas:
             print("No se puede mover a la derecha")
             return posicion
         else:
@@ -57,7 +61,7 @@ class Tablero:
     def mover_izquierda(self, pieza, posicion):
         filas = posicion[0]
         columnas = posicion[1] -1
-        if self.overlap_check(pieza, posicion):
+        if self.overlap_check(pieza, posicion) or columnas == -1:
             print("No se puede mover a la izquierda")
             return posicion
         else:
@@ -89,12 +93,14 @@ class Tablero:
     def overlap_check(self, pieza, posicion):
         curr_piece_size_x = len(pieza)
         curr_piece_size_y = len(pieza[0])
-
+        estado = False
         for i in range(curr_piece_size_x):
             for j in range(curr_piece_size_y):
                 if self.tablero[posicion[0] + i][posicion[1] + j] == 1 and pieza[i][j] == 1:
-                    return False
-        return True
+                    estado = False
+                else:
+                    return True
+        return estado
     def print_tablero(self):
         """
         for i in range(self.filas -1,-1,-1):

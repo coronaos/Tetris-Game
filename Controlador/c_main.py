@@ -11,7 +11,7 @@ def cls():
 def playGame():
     pieza_actual = ficha.pieza_aleatoria()
     pos_pieza = [0,3]
-    tablero = Tablero(20,10)
+    tablero = Tablero(6,10)
     print("tablero")
     puntuacio = Punts("1000")
     tablero.colocar_pieza(pieza_actual, pos_pieza)
@@ -21,15 +21,15 @@ def playGame():
     while(movimiento_jugador!="q" or tablero.tablero_lleno(pieza_actual,pos_pieza)):
         if(movimiento_jugador == "a"):
             #left
-            pos_pieza = tablero.mover_izquierda(pieza_actual, pos_pieza)
+            new_pos = tablero.mover_izquierda(pieza_actual, pos_pieza)
             pass
         elif(movimiento_jugador == "d"):
             #right
-            pos_pieza = tablero.mover_derecha(pieza_actual, pos_pieza)
+            new_pos = tablero.mover_derecha(pieza_actual, pos_pieza)
             pass
         elif(movimiento_jugador == "s"):
             #down
-            pos_pieza = tablero.mover_abajo(pieza_actual, pos_pieza)
+            new_pos = tablero.mover_abajo(pieza_actual, pos_pieza)
             pass
         elif(movimiento_jugador == "k"):
             #rotate
@@ -46,15 +46,18 @@ def playGame():
         if num_filas_eliminas > 0:
             puntuacio.sumar_puntos(20 * num_filas_eliminas)
             tablero.print_tablero()
-        #ESTO NO LO ENTIENDO :(
-        """
+        #ESTO NO LO ENTIENDO :( -- es para ver si ha llegado al final
+
         if new_pos == pos_pieza:
             pieza_actual = ficha.pieza_aleatoria()
-            pos_pieza = [19,5]
+            pos_pieza = [0,3]
+            print("/n")
+            tablero.colocar_pieza(pieza_actual, pos_pieza)
+            tablero.print_tablero()
         else:
             pos_pieza = new_pos
-        """
+
         movimiento_jugador = input()
-        cls()
+        #cls()
     ficheros.escribirFichero(vista.nombreJugador, puntuacio.get_puntos())
     print("Thank you for playing!")
