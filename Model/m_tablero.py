@@ -4,21 +4,16 @@ class Tablero:
         self.filas = filas
         self.columnas = columnas
         #self.tablero = [[0] * columnas for _ in range(filas)]
-        self.tablero = [[0 for x in range(10)] for y in range(20)]
+        self.tablero = [[0 for x in range(self.filas)] for y in range(self.columnas)]
 
 
     # donde pieza sería una del array y posicion la fila y columna donde colocamos
     def colocar_pieza(self, pieza, posicion):
-        if posicion[0] >= self.filas or posicion[0] < 0:
-            exit("La fila no que corresponde al tamaño")
-        if posicion[1] >= self.columnas or posicion[1] < 0:
-            exit("La columna no que corresponde al tamaño")
         curr_piece_x = len(pieza)
         curr_piece_y = len(pieza[0])
         for i in range(curr_piece_x):
             for j in range(curr_piece_y):
-                if self.tablero[posicion[0]+i][posicion[1]+j] == 0:
-                    #CHEQUEAR QUE NO SE VAYA DEL TABLERO.
+                if (self.tablero[posicion[0]+i][posicion[1]+j] == 0):
                     self.tablero[posicion[0]+i][posicion[1]+j] = pieza[i][j]
     def borrar_pieza(self, pieza, posicion):
         curr_piece_x = len(pieza)
@@ -29,40 +24,47 @@ class Tablero:
                     # CHEQUEAR QUE NO SE VAYA DEL TABLERO.
                     self.tablero[posicion[0] + i][posicion[1] + j] = 0
     def mover_abajo(self, pieza, posicion):
-
-        #self.borrar_pieza(pieza, posicion)
-
         filas = posicion[0] + 1
         columnas = posicion[1]
+        self.borrar_pieza(pieza, posicion)
+        result = (self.overlap_check(pieza, [filas, columnas]))
+        if result == True:
+            self.colocar_pieza(pieza, posicion)
 
-        if self.overlap_check(pieza, posicion):
-            print("No se puede mover abajo")
             return posicion
+        elif(result == [20,20]):
+            self.colocar_pieza(pieza, [filas, columnas])
+            return False
+        elif(result == [21,21]):
+            self.colocar_pieza(pieza, posicion)
+            return False
         else:
-            self.borrar_pieza(pieza, posicion)
+            #self.borrar_pieza(pieza, posicion)
             self.colocar_pieza(pieza, [filas, columnas])
             return [filas, columnas]
 
     def mover_derecha(self, pieza, posicion):
         filas = posicion[0]
         columnas = posicion[1] + 1
-        if self.overlap_check(pieza, posicion):
-            print("No se puede mover a la derecha")
+        self.borrar_pieza(pieza, posicion)
+        if (self.overlap_check(pieza, [filas, columnas])):
+            self.colocar_pieza(pieza, posicion)
             return posicion
         else:
-            self.borrar_pieza(pieza, posicion)
+            #self.borrar_pieza(pieza, posicion)
             self.colocar_pieza(pieza, [filas, columnas])
             return [filas, columnas]
 
     def mover_izquierda(self, pieza, posicion):
         filas = posicion[0]
-        columnas = posicion[1] -1
-        if self.overlap_check(pieza, posicion):
-            print("No se puede mover a la izquierda")
+        columnas = posicion[1] - 1
+        self.borrar_pieza(pieza, posicion)
+        if self.overlap_check(pieza, [filas, columnas]):
+            self.colocar_pieza(pieza, posicion)
             return posicion
         else:
-            self.borrar_pieza(pieza, posicion)
-            self.colocar_pieza(pieza, (filas, columnas))
+            #self.borrar_pieza(pieza, posicion)
+            self.colocar_pieza(pieza, [filas, columnas])
             return [filas, columnas]
 
     def linea_completa(self):
@@ -92,9 +94,17 @@ class Tablero:
 
         for i in range(curr_piece_size_x):
             for j in range(curr_piece_size_y):
-                if self.tablero[posicion[0] + i][posicion[1] + j] == 1 and pieza[i][j] == 1:
-                    return False
-        return True
+                if (posicion[1] + j) < 10 and posicion[1] + j > -1 and (posicion[0] + i) < 20:
+                    if (self.tablero[posicion[0] + i][posicion[1] + j] == 1 and pieza[i][j] == 1):
+                        return[21,21]
+                    elif(posicion[0] + i == 19):
+
+                        return[20,20]
+                else:
+
+                    return True
+
+        return False
     def print_tablero(self):
         """
         for i in range(self.filas -1,-1,-1):
@@ -103,6 +113,12 @@ class Tablero:
 
             print("\n")
         """
-        for x in self.tablero:
-            print(x)
 
+        for x in self.tablero:
+            visual = list
+            for y in x:
+                if(y == 0):
+                    visual.append("  ")
+                elif(y == 1):
+                    visual.append("[]")
+            print(visual)
