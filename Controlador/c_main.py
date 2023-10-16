@@ -10,7 +10,7 @@ import signal
 
 
 def cls():
-    os.system('clear')
+    os.system('cls')
 def playGame():
     pieza_actual = ficha.pieza_aleatoria()
     pos_pieza = [0,3]
