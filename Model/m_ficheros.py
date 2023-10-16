@@ -1,12 +1,16 @@
+import os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
 def leerFichero():
-    with open("/Users/matieslopezalarcon/Documents/GitHub/Tetris-Game/Model/historial.txt") as f:
+    print(script_dir)
+    with open(script_dir + "/historial.txt") as f:
         texto = f.readlines()
         f.close()
         return texto
 
 
 def escribirFichero(nombre, puntuacion):
-    f = open("/Users/matieslopezalarcon/Documents/GitHub/Tetris-Game/Model/historial.txt", "a+")
+    f = open(script_dir + "/historial.txt", "a+")
     f.write("\n"+puntuacion+" "+nombre)
     f.close()
 
