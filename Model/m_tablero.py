@@ -30,7 +30,6 @@ class Tablero:
         result = (self.overlap_check(pieza, [filas, columnas]))
         if result == True:
             self.colocar_pieza(pieza, posicion)
-
             return posicion
         elif(result == [20,20]):
             self.colocar_pieza(pieza, [filas, columnas])
@@ -38,7 +37,7 @@ class Tablero:
         elif(result == [21,21]):
             self.colocar_pieza(pieza, posicion)
             return False
-        else:
+        elif (result == False):
             #self.borrar_pieza(pieza, posicion)
             self.colocar_pieza(pieza, [filas, columnas])
             return [filas, columnas]
@@ -94,17 +93,21 @@ class Tablero:
 
         for i in range(curr_piece_size_x):
             for j in range(curr_piece_size_y):
-                if (posicion[1] + j) < 10 and posicion[1] + j > -1 and (posicion[0] + i) < 20:
-                    if (self.tablero[posicion[0] + i][posicion[1] + j] == 1 and pieza[i][j] == 1):
+                if (posicion[1] + j < 10) and  (posicion[1] + j > -1) and (posicion[0] + i < 20):
+                    #si no pasa las barreras del tablero
+                    if (posicion[0] + i == 19) and (self.tablero[19][posicion[1]+j] == 0):
+                        # si llega al final del tablero y se coloca si o si
+                        return [20, 20]
+                    if (self.tablero[posicion[0] + i][posicion[1] + j] == 1) and (pieza[i][j] == 1):
+                        #si en la pieza hay un 1 y en el tablero tambien(choque de piezas)
                         return[21,21]
-                    elif(posicion[0] + i == 19):
-
-                        return[20,20]
                 else:
-
+                    #si pasa las barreras del tablero
                     return True
 
         return False
+
+
     def print_tablero(self):
         """
         for i in range(self.filas -1,-1,-1):
