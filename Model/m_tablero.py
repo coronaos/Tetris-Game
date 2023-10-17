@@ -1,5 +1,6 @@
 from copy import deepcopy
 class Tablero:
+
     def __init__(self, filas, columnas):
         self.filas = filas
         self.columnas = columnas
@@ -8,6 +9,7 @@ class Tablero:
 
 
     # donde pieza sería una del array y posicion la fila y columna donde colocamos
+
     def colocar_pieza(self, pieza, posicion):
         curr_piece_x = len(pieza)
         curr_piece_y = len(pieza[0])
@@ -15,6 +17,7 @@ class Tablero:
             for j in range(curr_piece_y):
                 if (self.tablero[posicion[0]+i][posicion[1]+j] == 0):
                     self.tablero[posicion[0]+i][posicion[1]+j] = pieza[i][j]
+
     def borrar_pieza(self, pieza, posicion):
         curr_piece_x = len(pieza)
         curr_piece_y = len(pieza[0])
@@ -23,6 +26,7 @@ class Tablero:
                 if self.tablero[posicion[0] + i][posicion[1] + j] == 1:
                     # CHEQUEAR QUE NO SE VAYA DEL TABLERO.
                     self.tablero[posicion[0] + i][posicion[1] + j] = 0
+
     def mover_abajo(self, pieza, posicion):
         filas = posicion[0] + 1
         columnas = posicion[1]
@@ -31,13 +35,13 @@ class Tablero:
         if result == True:
             self.colocar_pieza(pieza, posicion)
             return posicion
-        elif(result == [20,20]):
+        elif result == [20,20]:
             self.colocar_pieza(pieza, [filas, columnas])
             return False
-        elif(result == [21,21]):
+        elif result == [21,21]:
             self.colocar_pieza(pieza, posicion)
             return False
-        elif (result == False):
+        elif result == False:
             #self.borrar_pieza(pieza, posicion)
             self.colocar_pieza(pieza, [filas, columnas])
             return [filas, columnas]
@@ -100,28 +104,10 @@ class Tablero:
                         return [20, 20]
                     if (self.tablero[posicion[0] + i][posicion[1] + j] == 1) and (pieza[i][j] == 1):
                         #si en la pieza hay un 1 y en el tablero tambien(choque de piezas)
-                        return[21,21]
+                        return [21,21]
                 else:
                     #si pasa las barreras del tablero
                     return True
 
         return False
 
-
-    def print_tablero(self):
-        """
-        for i in range(self.filas -1,-1,-1):
-            for j in range (self.columnas-1, -1, -1):
-                print(self.tablero[i][j])
-
-            print("\n")
-        """
-
-        for x in self.tablero:
-            visual = []
-            for y in x:
-                if(y == 0):
-                    visual.append("  ")
-                elif(y == 1):
-                    visual.append("[]")
-            print(visual)

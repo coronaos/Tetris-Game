@@ -2,8 +2,8 @@ import os
 import sys
 import platform
 import select
-#import tty
-#import termios
+import tty
+import termios
 import time
 
 def wait_for_input(timeout):
@@ -14,7 +14,7 @@ def wait_for_input(timeout):
             if msvcrt.kbhit():
                 return msvcrt.getch().decode()
         return None
-    """
+
     else:
         fd = sys.stdin.fileno()
         old_settings = termios.tcgetattr(fd)
@@ -26,5 +26,3 @@ def wait_for_input(timeout):
             return None
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-            
-            """
