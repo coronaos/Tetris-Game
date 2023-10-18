@@ -2,8 +2,8 @@ import os
 import sys
 import platform
 import select
-import tty
-import termios
+#import tty
+#import termios
 import time
 
 def wait_for_input(timeout):

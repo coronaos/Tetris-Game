@@ -26,8 +26,8 @@ def start(tecla):
         print("[ERROR]: Press 1, 2 or 3 to navegate in the menu.")
 
 def cls():
-    os.system('clear') #PARA UNIX
-    #os.system('cls') #PARA WINDOWS
+    #os.system('clear') #PARA UNIX
+    os.system('cls') #PARA WINDOWS
 
 
 
@@ -85,12 +85,12 @@ def playGame(nombreJugador):
         num_filas_eliminas = m_tablero.linea_completa()
 
 
-        print_all(m_tablero, m_pieza_siguiente)
+        print_all(m_tablero.tablero, m_pieza_siguiente)
         # miramos si se elimina fila, en caso de que si sumamos puntos y printamos tablero.
         if num_filas_eliminas > 0:
             m_puntuacio.sumar_puntos(20 * num_filas_eliminas)
             print("HOLA ESTO ES UNA PRUEBA")
-            print_all(m_tablero, m_pieza_siguiente)
+            print_all(m_tablero.tablero, m_pieza_siguiente)
 
         if m_colocada == True:
             print("new piece")
@@ -100,7 +100,7 @@ def playGame(nombreJugador):
             m_pos_pieza = [0, 3]
             m_tablero.colocar_pieza(m_pieza_actual, m_pos_pieza)
             cls()
-            print_all(m_tablero, m_pieza_siguiente)
+            print_all(m_tablero.tablero, m_pieza_siguiente)
 
         m_movimiento_jugador = wait_for_input(0.5)
         if(m_movimiento_jugador):
