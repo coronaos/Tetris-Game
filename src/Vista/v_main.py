@@ -1,8 +1,6 @@
-import Controlador.c_main as controlador
+import src.Controlador.c_main as controlador
 
 if __name__ == "__main__":
-
-
     print("TETRIS GAME")
     print("\n")
     print("by Maties & Esther")

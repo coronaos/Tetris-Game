@@ -1,4 +1,5 @@
 def print_all(tablero, ficha):
+    print("-----------------------------------TETRIS GAME-----------------------------------")
     visual_ficha = print_ficha_siguiente(ficha)
     visual_tablero = print_tablero(tablero)
     for fila1, fila2 in zip(visual_tablero, visual_ficha):

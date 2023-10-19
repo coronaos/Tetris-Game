@@ -1,5 +1,5 @@
-import Controlador.c_main as controlador
-import Model.m_ficheros as ficheros
+import src.Controlador.c_main as controlador
+import src.Model.m_ficheros as ficheros
 import time
 def vistaRanking():
     ranking = ficheros.rankingFichero()

@@ -1,10 +1,10 @@
-from Model.m_tablero import Tablero
+from src.Model.m_tablero import Tablero
 from ontab import wait_for_input
-import Model.m_fichas as ficha
-import Model.m_ficheros as ficheros
-from Model.m_print import print_all
-from Model.m_puntuacion import Punts
-import Vista.v_ranking as ranking
+import src.Model.m_fichas as ficha
+import src.Model.m_ficheros as ficheros
+from src.Model.m_print import print_all
+from src.Model.m_puntuacion import Punts
+import src.Vista.v_ranking as ranking
 import os
 
 def start(tecla):
@@ -40,7 +40,7 @@ def playGame(nombreJugador):
     m_tablero.colocar_pieza(m_pieza_actual, m_pos_pieza)
     cls()
     m_pieza_siguiente = ficha.pieza_aleatoria()
-    print("HOLA ESTO ES UNA PRUEBA")
+
     print_all(m_tablero.tablero, m_pieza_siguiente)
 
     m_movimiento_jugador = input()
@@ -89,7 +89,6 @@ def playGame(nombreJugador):
         # miramos si se elimina fila, en caso de que si sumamos puntos y printamos tablero.
         if num_filas_eliminas > 0:
             m_puntuacio.sumar_puntos(20 * num_filas_eliminas)
-            print("HOLA ESTO ES UNA PRUEBA")
             print_all(m_tablero.tablero, m_pieza_siguiente)
 
         if m_colocada == True:
