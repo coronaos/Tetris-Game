@@ -69,7 +69,7 @@ class Tablero:
 
     def linea_completa(self):
         num_filas = 0
-        for i in range(self.filas - 1, -1, -1):
+        for i in range(self.columnas):
                 if all(self.tablero[i]):
                     self.linea_eliminada(i)
                     num_filas += 1
@@ -79,10 +79,10 @@ class Tablero:
         # eliminamos la fila que se ha completado
         del self.tablero[fila]
         # añadimos una fila de 0 en la parte superior (stack)
-        self.tablero.insert(0, [0] * self.columnas)
+        self.tablero.insert(0, [0] * self.filas)
 
-    def tablero_lleno(self, pieza, posicion):
-        if self.overlap_check(pieza, posicion) and posicion[0] == (self.filas-1):
+    def tablero_lleno(self, colocada, posicion):
+        if posicion[0] == 0 and self.tablero[posicion[0]][posicion[1]] == 1 and not colocada:
             return True
         else:
             return False
@@ -93,9 +93,9 @@ class Tablero:
 
         for i in range(curr_piece_size_x):
             for j in range(curr_piece_size_y):
-                if (posicion[1] + j < 10) and  (posicion[1] + j > -1) and (posicion[0] + i < 20):
+                if (posicion[1] + j < self.filas) and  (posicion[1] + j > -1) and (posicion[0] + i < self.columnas):
                     # si no pasa las barreras del tablero
-                    if (posicion[0] + i == 19) and (self.tablero[19][posicion[1]+j] == 0):
+                    if (posicion[0] + i == self.columnas-1) and (self.tablero[self.columnas-1][posicion[1]+j] == 0):
                         # si llega al final del tablero y se coloca si o si
                         return [20, 20]
                     if (self.tablero[posicion[0] + i][posicion[1] + j] == 1) and (pieza[i][j] == 1):

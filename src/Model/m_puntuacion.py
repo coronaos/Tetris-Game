@@ -3,7 +3,7 @@ class Punts:
         self.puntos = 0
         self.maximo = maximo
 
-    def sumar_puntos(self,puntos):
+    def sumar_puntos(self, puntos):
         self.puntos += puntos
         return self.puntos
 

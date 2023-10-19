@@ -12,7 +12,7 @@ def leerFichero():
 
 def escribirFichero(nombre, puntuacion):
     f = open(script_dir + "/historial.txt", "a+")
-    f.write("\n"+puntuacion+" "+nombre[0:3])
+    f.write(f"\n {puntuacion} {nombre[0:3]}")
     f.close()
 
 

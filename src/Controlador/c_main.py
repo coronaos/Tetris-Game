@@ -7,6 +7,7 @@ from src.Model.m_puntuacion import Punts
 import src.Vista.v_ranking as ranking
 import os
 
+
 def start(tecla):
     cls()
     if tecla == "1":
@@ -16,7 +17,7 @@ def start(tecla):
         while len(nombreJugador) > 3:
             print("[ERROR]: Only valid a three letter name")
             nombreJugador = input()
-        playGame(nombreJugador)
+        playGame(nombreJugador.upper())
         # llamada a funcion de inicial la partida
     elif tecla == "2":
         ranking.vistaRanking()
@@ -25,15 +26,15 @@ def start(tecla):
     else:
         print("[ERROR]: Press 1, 2 or 3 to navegate in the menu.")
 
-def cls():
-    #os.system('clear') #PARA UNIX
-    os.system('cls') #PARA WINDOWS
 
+def cls():
+    # os.system('clear')  # PARA UNIX
+    os.system('cls')  # PARA WINDOWS
 
 
 def playGame(nombreJugador):
-    m_tablero = Tablero(10, 20)
-    m_puntuacio = Punts("1000")
+    m_tablero = Tablero(5, 10)
+    m_puntuacio = Punts(30)
     m_colocada = False
     m_pieza_actual = ficha.pieza_aleatoria()
     m_pos_pieza = [0, 3]
@@ -41,12 +42,12 @@ def playGame(nombreJugador):
     cls()
     m_pieza_siguiente = ficha.pieza_aleatoria()
 
-    print_all(m_tablero.tablero, m_pieza_siguiente)
+    print_all(m_tablero.tablero, m_pieza_siguiente, m_puntuacio.get_puntos(), nombreJugador)
 
     m_movimiento_jugador = input()
     cls()
-
-    while m_movimiento_jugador != "q" or m_tablero.tablero_lleno(m_pieza_actual, m_pos_pieza) == False:
+    # m_tablero.tablero_lleno(m_colocada, m_pos_pieza) FUNCION QUE MIRA SI ESTA LLENO
+    while m_movimiento_jugador != "q" and not m_puntuacio.puntuacion_maxima():
         if m_movimiento_jugador == "a":
             #left
             m_pos_pieza = m_tablero.mover_izquierda(m_pieza_actual, m_pos_pieza)
@@ -84,12 +85,10 @@ def playGame(nombreJugador):
 
         num_filas_eliminas = m_tablero.linea_completa()
 
-
-        print_all(m_tablero.tablero, m_pieza_siguiente)
+        print_all(m_tablero.tablero, m_pieza_siguiente, m_puntuacio.get_puntos(), nombreJugador)
         # miramos si se elimina fila, en caso de que si sumamos puntos y printamos tablero.
         if num_filas_eliminas > 0:
             m_puntuacio.sumar_puntos(20 * num_filas_eliminas)
-            print_all(m_tablero.tablero, m_pieza_siguiente)
 
         if m_colocada == True:
             print("new piece")
@@ -99,7 +98,7 @@ def playGame(nombreJugador):
             m_pos_pieza = [0, 3]
             m_tablero.colocar_pieza(m_pieza_actual, m_pos_pieza)
             cls()
-            print_all(m_tablero.tablero, m_pieza_siguiente)
+            print_all(m_tablero.tablero, m_pieza_siguiente, m_puntuacio.get_puntos(), nombreJugador)
 
         m_movimiento_jugador = wait_for_input(0.5)
         if(m_movimiento_jugador):
