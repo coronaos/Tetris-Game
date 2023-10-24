@@ -3,3 +3,18 @@
  40 ert
  40 ert
  50 EST
+ 40 ERT
+ 40 ERT
+ 80 ERT
+ 0 ERT
+ 0 ERT
+ 0 ERT
+ 0 ERT
+ 0 ERT
+ 0 ERT
+ 0 ERT
+ 0 ERT
+ 0 ERT
+ 0 ERT
+ 0 ERT
+ 0 ERT

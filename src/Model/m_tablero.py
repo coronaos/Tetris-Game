@@ -13,7 +13,8 @@ class Tablero:
         for i in range(curr_piece_x):
             for j in range(curr_piece_y):
                 if self.tablero[posicion[0]+i][posicion[1]+j] == 0:
-                    self.tablero[posicion[0]+i][posicion[1]+j] = pieza[i][j]
+                    if pieza[i][j] == 1:
+                        self.tablero[posicion[0]+i][posicion[1]+j] = pieza[i][j]
 
     def borrar_pieza(self, pieza, posicion):
         curr_piece_x = len(pieza)
@@ -22,7 +23,8 @@ class Tablero:
             for j in range(curr_piece_y):
                 if self.tablero[posicion[0] + i][posicion[1] + j] == 1:
                     # CHEQUEAR QUE NO SE VAYA DEL TABLERO.
-                    self.tablero[posicion[0] + i][posicion[1] + j] = 0
+                    if pieza[i][j] == 1:
+                        self.tablero[posicion[0] + i][posicion[1] + j] = 0
 
     def mover_abajo(self, pieza, posicion):
         filas = posicion[0] + 1
@@ -81,11 +83,12 @@ class Tablero:
         # añadimos una fila de 0 en la parte superior (stack)
         self.tablero.insert(0, [0] * self.filas)
 
-    def tablero_lleno(self, colocada, posicion):
-        if posicion[0] == 0 and self.tablero[posicion[0]][posicion[1]] == 1 and not colocada:
-            return True
-        else:
-            return False
+    def tablero_lleno(self, colocada):
+        if colocada:
+            for i in self.tablero[0:][0]:
+                if i == 1:
+                    return True
+        return False
 
     def overlap_check(self, pieza, posicion):
         curr_piece_size_x = len(pieza)
@@ -100,7 +103,7 @@ class Tablero:
                         return [20, 20]
                     if (self.tablero[posicion[0] + i][posicion[1] + j] == 1) and (pieza[i][j] == 1):
                         # si en la pieza hay un 1 y en el tablero tambien(choque de piezas)
-                        return [21,21]
+                        return [21, 21]
                 else:
                     # si pasa las barreras del tablero
                     return True

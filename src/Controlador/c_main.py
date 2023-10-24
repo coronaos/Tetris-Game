@@ -41,13 +41,12 @@ def playGame(nombreJugador):
     m_tablero.colocar_pieza(m_pieza_actual, m_pos_pieza)
     cls()
     m_pieza_siguiente = ficha.pieza_aleatoria()
-
     print_all(m_tablero.tablero, m_pieza_siguiente, m_puntuacio.get_puntos(), nombreJugador)
-
+    tablero_lleno = False
     m_movimiento_jugador = input()
     cls()
     # m_tablero.tablero_lleno(m_colocada, m_pos_pieza) FUNCION QUE MIRA SI ESTA LLENO
-    while m_movimiento_jugador != "q" and not m_puntuacio.puntuacion_maxima():
+    while m_movimiento_jugador != "q" and not m_puntuacio.puntuacion_maxima() and not tablero_lleno:
         if m_movimiento_jugador == "a":
             #left
             m_pos_pieza = m_tablero.mover_izquierda(m_pieza_actual, m_pos_pieza)
@@ -83,22 +82,27 @@ def playGame(nombreJugador):
 
         # printamos el tablero con la pieza colocada
 
-        num_filas_eliminas = m_tablero.linea_completa()
+
 
         print_all(m_tablero.tablero, m_pieza_siguiente, m_puntuacio.get_puntos(), nombreJugador)
-        # miramos si se elimina fila, en caso de que si sumamos puntos y printamos tablero.
-        if num_filas_eliminas > 0:
-            m_puntuacio.sumar_puntos(20 * num_filas_eliminas)
+
 
         if m_colocada == True:
-            print("new piece")
-            m_colocada = False
-            m_pieza_actual = m_pieza_siguiente
-            m_pieza_siguiente = ficha.pieza_aleatoria()
-            m_pos_pieza = [0, 3]
-            m_tablero.colocar_pieza(m_pieza_actual, m_pos_pieza)
-            cls()
-            print_all(m_tablero.tablero, m_pieza_siguiente, m_puntuacio.get_puntos(), nombreJugador)
+            num_filas_eliminas = m_tablero.linea_completa()
+            # miramos si se elimina fila, en caso de que si sumamos puntos y printamos tablero.
+            if num_filas_eliminas > 0:
+                m_puntuacio.sumar_puntos(20 * num_filas_eliminas)
+            if not m_tablero.tablero_lleno(m_colocada):
+                print("new piece")
+                m_colocada = False
+                m_pieza_actual = m_pieza_siguiente
+                m_pieza_siguiente = ficha.pieza_aleatoria()
+                m_pos_pieza = [0, 3]
+                m_tablero.colocar_pieza(m_pieza_actual, m_pos_pieza)
+                cls()
+                print_all(m_tablero.tablero, m_pieza_siguiente, m_puntuacio.get_puntos(), nombreJugador)
+            else:
+                tablero_lleno = True
 
         m_movimiento_jugador = wait_for_input(0.5)
         if(m_movimiento_jugador):
@@ -109,6 +113,7 @@ def playGame(nombreJugador):
         cls()
 
     ficheros.escribirFichero(nombreJugador, m_puntuacio.get_puntos())
+    print_all(m_tablero.tablero, m_pieza_siguiente, m_puntuacio.get_puntos(), nombreJugador)
     print("Thank you for playing!")
 
 
