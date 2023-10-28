@@ -1,7 +1,7 @@
 class Punts:
     def __init__(self, maximo):
         self.puntos = 0
-        self.maximo = maximo
+        self.maximo = abs(maximo)
 
     def sumar_puntos(self, puntos):
         self.puntos += puntos

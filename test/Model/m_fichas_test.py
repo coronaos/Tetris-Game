@@ -6,3 +6,4 @@ def rotar_pieza_erronea(pieza):
         print("Pieza erronea detectada")
     else:
         print("Pieza correcta")
+

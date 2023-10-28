@@ -5,14 +5,18 @@ import unittest
         return True if self.puntos >= self.maximo else False
 
 """
+
+#con este test vemos problemas con los valores negativos.
 def test_inicializacion():
-    puntos = Punts(100)
+    puntos = Punts(-100)
 
     if puntos.get_puntos() == 0:
         if puntos.maximo == 100:
             print("PASSED TEST")
+        if puntos.maximo == -100:
+            print("[ERROR]: Se inicializa con puntuación maxima negativa.")
         else:
-            print("[ERROR]: No se inicializa con la puntuación maxima correcta.")
+            print("[ERROR]: No se inicializa con la puntuación maxima correcta")
     else:
         print("[ERROR]: Al crear la classe no empiezas con 0 puntos.")
 

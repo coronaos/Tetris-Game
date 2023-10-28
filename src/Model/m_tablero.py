@@ -2,8 +2,8 @@ from copy import deepcopy
 class Tablero:
 
     def __init__(self, filas, columnas):
-        self.filas = filas
-        self.columnas = columnas
+        self.filas = abs(filas)
+        self.columnas = abs(columnas)
         self.tablero = [[0 for x in range(self.filas)] for y in range(self.columnas)]
 
     # donde pieza sería una del array y posicion la fila y columna donde colocamos
