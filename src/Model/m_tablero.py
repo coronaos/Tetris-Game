@@ -96,7 +96,7 @@ class Tablero:
 
         for i in range(curr_piece_size_x):
             for j in range(curr_piece_size_y):
-                if (posicion[1] + j < self.filas) and  (posicion[1] + j > -1) and (posicion[0] + i < self.columnas):
+                if (posicion[1] + j < self.filas) and (posicion[1] + j > -1) and (posicion[0] + i < self.columnas) and (posicion[0] + i > 0):
                     # si no pasa las barreras del tablero
                     if (posicion[0] + i == self.columnas-1) and (self.tablero[self.columnas-1][posicion[1]+j] == 0):
                         # si llega al final del tablero y se coloca si o si
