@@ -27,9 +27,12 @@ def pieza_aleatoria():
 
 
 def rotar_pieza(pieza):
-    copiaPieza = deepcopy(pieza)
-    reversa = copiaPieza[::-1]
-    piezafinal = []
-    for element in zip(*reversa):
-        piezafinal.append(list(element))
-    return piezafinal
+    if(pieza in piezas):
+        copiaPieza = deepcopy(pieza)
+        reversa = copiaPieza[::-1]
+        piezafinal = []
+        for element in zip(*reversa):
+            piezafinal.append(list(element))
+        return piezafinal
+    else:
+        return False
