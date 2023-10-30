@@ -12,6 +12,7 @@ def start(tecla):
     cls()
     if tecla == "1":
         print("Press a,s,d to move the piece to the left, down and right position")
+        print("Press q to quit while you're playing")
         print("Introduce a three letter name")
         nombreJugador = input()
         while len(nombreJugador) > 3:
@@ -28,7 +29,7 @@ def start(tecla):
 
 
 def cls():
-    # os.system('clear')  # PARA UNIX
+    #os.system('clear')  # PARA UNIX
     os.system('cls')  # PARA WINDOWS
 
 

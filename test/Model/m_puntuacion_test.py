@@ -1,10 +1,6 @@
 from src.Model.m_puntuacion import Punts
 import unittest
-"""
-    def puntuacion_maxima(self):
-        return True if self.puntos >= self.maximo else False
 
-"""
 
 #con este test vemos problemas con los valores negativos.
 def test_inicializacion():
