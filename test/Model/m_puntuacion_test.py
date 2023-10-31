@@ -1,20 +1,11 @@
 from src.Model.m_puntuacion import Punts
-import unittest
-
 
 #con este test vemos problemas con los valores negativos.
 def test_inicializacion():
-    puntos = Punts(-100)
 
-    if puntos.get_puntos() == 0:
-        if puntos.maximo == 100:
-            print("PASSED TEST")
-        if puntos.maximo == -100:
-            print("[ERROR]: Se inicializa con puntuación maxima negativa.")
-        else:
-            print("[ERROR]: No se inicializa con la puntuación maxima correcta")
-    else:
-        print("[ERROR]: Al crear la classe no empiezas con 0 puntos.")
+    puntos = Punts(-100)
+    assert(puntos.get_puntos() == 0)
+    assert(puntos.maximo == 100)
 
 def test_sumar_puntos():
 
@@ -41,12 +32,6 @@ def test_puntuacion_maxima():
 
 def test_get_puntos():
     puntos = Punts(50)
-
-    if puntos.get_puntos() == 0:
-        puntos.sumar_puntos(50)
-        if puntos.get_puntos() == 50:
-            print("PASSED TEST")
-        else:
-            print("[ERROR]: No devuelve valor correcto despues de sumar.")
-    else:
-        print("[ERROR]: No devuelve valor correctp despues de inicializar.")
+    assert(puntos.get_puntos() == 0)
+    puntos.puntos = 50
+    assert(puntos.get_puntos() == 50)

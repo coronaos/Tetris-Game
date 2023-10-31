@@ -1,5 +1,5 @@
 import src.Controlador.c_main as controlador
 
-tecla = "l"
-def test_start(tecla): #Si le damos una tecla o nombre no aceptado, debería salir ERROR.
+def test_start(): #Si le damos una tecla o nombre no aceptado, debería salir ERROR.
+    tecla = "l"
     controlador.start(tecla)

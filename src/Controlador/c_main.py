@@ -34,8 +34,8 @@ def cls():
 
 
 def playGame(nombreJugador):
-    m_tablero = Tablero(5, 10)
-    m_puntuacio = Punts(30)
+    m_tablero = Tablero(10, 20)
+    m_puntuacio = Punts(100)
     m_colocada = False
     m_pieza_actual = ficha.pieza_aleatoria()
     m_pos_pieza = [0, 3]
@@ -105,7 +105,7 @@ def playGame(nombreJugador):
             else:
                 tablero_lleno = True
 
-        m_movimiento_jugador = wait_for_input(0.5)
+        m_movimiento_jugador = wait_for_input(0.3)
         if(m_movimiento_jugador):
             pass
         else:

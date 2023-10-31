@@ -66,7 +66,6 @@ def pieza_aleatoria():
     i = random.randrange(len(piezas))
     return piezas[i]
 
-
 def rotar_pieza(pieza):
     if(pieza in piezas_completas):
         copiaPieza = deepcopy(pieza)
