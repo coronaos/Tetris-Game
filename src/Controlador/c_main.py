@@ -7,7 +7,6 @@ from src.Model.m_puntuacion import Punts
 import src.Vista.v_ranking as ranking
 import os
 
-
 def start(tecla):
     cls()
     if tecla == "1":
