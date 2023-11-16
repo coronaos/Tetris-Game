@@ -10,3 +10,18 @@ def test_tablero_lleno(): #Se introduce un 1 en la fila 0 para ver si la funció
     for i in tablero.tablero:
         i[0] = 1
     assert(tablero.tablero_lleno(True) == True), "Fin de partida"
+
+def test_overlap_check_final():
+    tablero = Tablero(5, 10)
+    pieza = [[]]
+    posicion = [5,3]
+
+def test_overlap_check_fueratablero():
+    tablero = Tablero(5, 10)
+    pieza = [[]]
+    posicion = [5,3]
+
+def test_overlap_check_choquedepiezas():
+    tablero = Tablero(5, 10)
+    pieza = [[]]
+    posicion = [5,3]
