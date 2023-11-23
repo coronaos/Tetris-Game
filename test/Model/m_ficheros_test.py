@@ -1,28 +1,31 @@
-import src.Model.m_ficheros as ficheros
+from src.Model.m_ficheros import Fichero
 import os
+import unittest
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
 nombre = "MATIES"
 puntuacion = "200"
-def test_escribirFichero(): #Test para revisar que se escribe bien la puntuación y nombre en el historial
-    escribirFichero(nombre, puntuacion)
-    #with open(script_dir + "/historial_test.txt") as f:
+class TestFichers(unittest.TestCase):
+    def setUp(self):
+        self.m_fichero_test = Fichero("\historial_test.txt")
+        open(self.m_fichero_test.fichero, 'w').close()
+    def deletePath(self):
+        open(self.m_fichero_test.fichero, 'w').close()
+    def test_escribirFichero(self): #Test para revisar que se escribe bien la puntuación y nombre en el historial
+        usuario = "usuario1"
+        puntuacion = 100
+        self.m_fichero_test.escribirFichero(usuario, puntuacion)
 
-def leerFichero():
-    with open(script_dir + "/historial_test.txt") as f:
-        texto = f.readlines()
-        f.close()
-        return texto
+        with open(self.m_fichero_test.fichero, 'r') as file:
+            contents = file.read()
+            self.assertIn(f"{puntuacion} {usuario[0:3]}", contents)
 
+        self.deletePath()
 
-def escribirFichero(nombre, puntuacion):
-    f = open(script_dir + "/historial_test.txt", "a+")
-    f.write(f"{puntuacion} {nombre[0:3]}\n")
-    f.close()
+    def test_leerFichero(self):
+        self.m_fichero_test.escribirFichero("us1", 100)
+        
+        self.m_fichero_test.escribirFichero("us2", 50)
+        self.m_fichero_test.escribirFichero("us3", 20)
 
-
-def rankingFichero():
-    puntos = leerFichero()
-    ordenadoP = sorted(puntos, reverse=True)
-    return ordenadoP[0:3]

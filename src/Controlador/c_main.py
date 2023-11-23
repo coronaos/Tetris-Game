@@ -1,7 +1,7 @@
 from src.Model.m_tablero import Tablero
 from ontab import wait_for_input
 import src.Model.m_fichas as ficha
-import src.Model.m_ficheros as ficheros
+from src.Model.m_ficheros import Fichero
 from src.Model.m_print import print_all
 from src.Model.m_puntuacion import Punts
 import src.Vista.v_ranking as ranking
@@ -39,6 +39,7 @@ def playGame(nombreJugador):
     m_colocada = False
     m_pieza_actual = ficha.pieza_aleatoria()
     m_pos_pieza = [0, 3]
+    m_fichero = Fichero("\historial.txt")
     m_tablero.colocar_pieza(m_pieza_actual, m_pos_pieza)
     cls()
     m_pieza_siguiente = ficha.pieza_aleatoria()
@@ -113,7 +114,7 @@ def playGame(nombreJugador):
 
         cls()
 
-    ficheros.escribirFichero(nombreJugador, m_puntuacio.get_puntos())
+    m_fichero.escribirFichero(nombreJugador, m_puntuacio.get_puntos())
     print_all(m_tablero.tablero, m_pieza_siguiente, m_puntuacio.get_puntos(), nombreJugador)
     print("Thank you for playing!")
 

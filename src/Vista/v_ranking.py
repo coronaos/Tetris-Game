@@ -1,8 +1,9 @@
 import src.Controlador.c_main as controlador
-import src.Model.m_ficheros as ficheros
+from src.Model.m_ficheros import Fichero
 import time
 def vistaRanking():
-    ranking = ficheros.rankingFichero()
+    m_fichero = Fichero("\historial.txt")
+    ranking = m_fichero.rankingFichero()
 
     print("RANKING TOP 3!")
     print("--------------")
