@@ -2,10 +2,6 @@ from src.Model.m_ficheros import Fichero
 import os
 import unittest
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
-
-nombre = "MATIES"
-puntuacion = "200"
 class TestFichers(unittest.TestCase):
     def setUp(self):
         self.m_fichero_test = Fichero("\historial_test.txt")
@@ -25,7 +21,26 @@ class TestFichers(unittest.TestCase):
 
     def test_leerFichero(self):
         self.m_fichero_test.escribirFichero("us1", 100)
-        
-        self.m_fichero_test.escribirFichero("us2", 50)
-        self.m_fichero_test.escribirFichero("us3", 20)
 
+        fichero_leido = self.m_fichero_test.leerFichero()
+        for i in fichero_leido:
+            self.assertIn(f"100 us1", i)
+
+        self.deletePath()
+
+    def test_rankingFichero(self):
+        correct_answer = [100, 100, 50]
+        self.m_fichero_test.escribirFichero("us1", 0)
+        self.m_fichero_test.escribirFichero("us1", 100)
+        self.m_fichero_test.escribirFichero("us1", 50)
+        self.m_fichero_test.escribirFichero("us1", 20)
+        self.m_fichero_test.escribirFichero("us1", 100)
+
+        fichero_rank = self.m_fichero_test.rankingFichero()
+        aux = 0
+
+        for i in fichero_rank:
+            self.assertIn(f"{correct_answer[aux]} us1", i)
+            aux = aux + 1
+
+        self.deletePath()

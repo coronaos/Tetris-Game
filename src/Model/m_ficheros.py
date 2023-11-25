@@ -20,5 +20,11 @@ class Fichero:
 
     def rankingFichero(self):
         puntos = self.leerFichero()
-        ordenadoP = sorted(puntos, reverse=True)
-        return ordenadoP[0:3]
+        datos_reordenadors = []
+        for p in puntos:
+            aux = p.split()
+            puntos = int(aux[0])
+            datos_reordenadors.append((puntos, p))
+        ordenado_P = sorted(datos_reordenadors, key=lambda x: x[0], reverse=True)
+        return [x[1] for x in ordenado_P[0:3]]
+

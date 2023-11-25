@@ -46,8 +46,11 @@ def playGame(nombreJugador):
     print_all(m_tablero.tablero, m_pieza_siguiente, m_puntuacio.get_puntos(), nombreJugador)
     tablero_lleno = False
     m_movimiento_jugador = input()
+    while m_movimiento_jugador not in ('q', 'a', 'd', 's', 'k'):
+        print("Invalid input")
+        m_movimiento_jugador = input()
     cls()
-    # m_tablero.tablero_lleno(m_colocada, m_pos_pieza) FUNCION QUE MIRA SI ESTA LLENO
+    #m_tablero.tablero_lleno(m_colocada, m_pos_pieza) FUNCION QUE MIRA SI ESTA LLENO
     while m_movimiento_jugador != "q" and not m_puntuacio.puntuacion_maxima() and not tablero_lleno:
         if m_movimiento_jugador == "a":
             #left
