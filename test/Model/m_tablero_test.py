@@ -1,6 +1,8 @@
 from src.Model.m_tablero import Tablero
 
-#gracias a este test arreglamos que puedan poner negativos
+'''
+Test de inicialización del tablero donde revisamos particiones, frontera, limite y negativos. 
+'''
 def test_inicializacion():
     # <5 maximo --> partciones eqv= 0 2, frontera = 5, limite = 4, 6
     # Test negatiu
@@ -25,12 +27,19 @@ def test_inicializacion():
     tablero = Tablero(4, 4)
     assert (tablero.filas == 5 and tablero.columnas == 5), "Se incializa con los valores dados."
 
-def test_tablero_lleno(): #Se introduce un 1 en la fila 0 para ver si la función detecta correctamente que has perdido.
+'''
+    Test que comprueba que finaliza la partida si el tablero se llena.
+'''
+def test_tablero_lleno():
+    #Se introduce un 1 en la fila 0 para ver si la función detecta correctamente que has perdido.
     tablero = Tablero(5, 10)
     for i in tablero.tablero:
         i[0] = 1
     assert(tablero.tablero_lleno(True) == True), "Fin de partida"
 
+'''
+    Seguidos de test que comprueban diferentes estados que devuelve función validación movimiento
+'''
 def test_overlap_check_finaltablero():
     tablero = Tablero(5, 10)
     pieza = [[1, 0],
@@ -63,6 +72,9 @@ def test_overlap_check_choquedepiezas():
     resultado = tablero.overlap_check(piezaTest, posicionTest)
     assert (resultado == [21, 21]), "Choque de piezas, colocada correctamente"
 
+'''
+    Test que comprueba loop simple
+'''
 def test_looptesting_1():
     tablero = Tablero(5,5)
     respuesta = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
@@ -70,6 +82,10 @@ def test_looptesting_1():
     posicion = [0, 0]
     tablero.borrar_pieza(pieza,posicion)
     assert(tablero.tablero == respuesta)
+
+'''
+    Test que comprueba loop simple, pero colocando y eliminado pieza.
+'''
 def test_looptesting_2():
     # Caso en el que el bucle se ejecuta una vez
     tablero = Tablero(5,5)
@@ -82,6 +98,9 @@ def test_looptesting_2():
     tablero.borrar_pieza(pieza, posicion)
     assert(tablero.tablero == respuesta)
 
+'''
+    Test que comprueba loop completo, colocando y eliminando pieza
+'''
 def test_looptesting_3():
     # Caso en el que el bucle se ejecuta una vez
     tablero = Tablero(5,5)

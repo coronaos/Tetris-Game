@@ -2,12 +2,25 @@ from src.Model.m_ficheros import Fichero
 import os
 import unittest
 
+'''
+Clase de test para comprobar funcionalidad ficheros. 
+'''
 class TestFichers(unittest.TestCase):
+
+    '''
+    Incialización de fichero
+    IMPORTANTE: Diferente al de producción.
+    '''
     def setUp(self):
         self.m_fichero_test = Fichero("\historial_test.txt")
         open(self.m_fichero_test.fichero, 'w').close()
+
+    '''
+    Función que elimina datos del fichero para realizar los casos de prueba.
+    '''
     def deletePath(self):
         open(self.m_fichero_test.fichero, 'w').close()
+
     def test_escribirFichero(self): #Test para revisar que se escribe bien la puntuación y nombre en el historial
         usuario = "usuario1"
         puntuacion = 100

@@ -1,3 +1,4 @@
+# Print principal donde se muestra por pantalla todos los datos
 def print_all(tablero, ficha, punts, nom):
     print("-----------------------------------TETRIS GAME-----------------------------------")
     print(f"JUGADOR: {nom} amb puntuació: {punts}")
@@ -16,6 +17,8 @@ def print_all(tablero, ficha, punts, nom):
         for elem3 in fila3:
             aux.append(elem3)
         print(f"{aux}    |    ")
+
+# Funcion auxiliar que cambia el estado de array a string de la pieza a printar
 def print_ficha_siguiente(ficha_siguiente):
     visual_ficha = []
     for x in ficha_siguiente:
@@ -27,6 +30,8 @@ def print_ficha_siguiente(ficha_siguiente):
                 visual.append("[]")
         visual_ficha.append(visual)
     return visual_ficha
+
+# Funcion auxiliar que cambia el estado de array a string del tablero a printar
 def print_tablero(tablero):
     visual_tablero = []
     for x in tablero:

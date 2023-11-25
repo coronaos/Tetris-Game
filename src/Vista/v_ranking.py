@@ -1,6 +1,8 @@
 import src.Controlador.c_main as controlador
 from src.Model.m_ficheros import Fichero
 import time
+
+# Vista donde se printa top 3 jugadores del fichero.
 def vistaRanking():
     m_fichero = Fichero("\historial.txt")
     ranking = m_fichero.rankingFichero()
