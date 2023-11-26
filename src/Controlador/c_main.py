@@ -26,7 +26,6 @@ def start(tecla):
         ranking.vistaRanking()
     elif tecla == "3":
         exit()
-
     else:
         print("[ERROR]: Press 1, 2 or 3 to navegate in the menu.")
 

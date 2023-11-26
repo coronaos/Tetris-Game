@@ -37,6 +37,24 @@ def test_tablero_lleno():
         i[0] = 1
     assert(tablero.tablero_lleno(True) == True), "Fin de partida"
 
+
+'''
+Test que revisa que lina completa devuelva información correcta. 
+Esta misma funcion comprueba tambien que cuando se complete, 
+se elimine la linea y se añada una nueva. 
+'''
+def test_linea_completa():
+    tablero = Tablero(5, 5)
+    res1 = tablero.linea_completa()
+    assert (res1 == 0)
+    respuesta = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+    pieza = [[1, 1, 1, 1, 1]]
+    posicion = [0,0]
+    tablero.colocar_pieza(pieza, posicion)
+    res2 = tablero.linea_completa()
+    assert (res2 == 1)
+    assert (tablero.tablero == respuesta)
+
 '''
     Seguidos de test que comprueban diferentes estados que devuelve función validación movimiento
 '''
@@ -72,6 +90,45 @@ def test_overlap_check_choquedepiezas():
     resultado = tablero.overlap_check(piezaTest, posicionTest)
     assert (resultado == [21, 21]), "Choque de piezas, colocada correctamente"
 
+def test_overlap_check_posicion_abajo():
+    tablero = Tablero(5, 10)
+    pieza = [[1, 0],
+             [1, 0],
+             [1, 1]]
+
+    posicion = [0, 4]
+
+    resultado = tablero.overlap_check(posicion, pieza)
+    assert (resultado == False), "La pieza se ha movido una posicion abajo correctamente"
+
+'''
+    Test que comprueba decision coverage en loop borrar i colocar pieza.
+    Lo complementan test_looptesting_1 y test_looptesting_2
+'''
+def test_decision_1_2():
+    tablero = Tablero(5,5)
+    respuesta = [[0, 1, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+    pieza1 = [[1]]
+    pieza2 = [[0]]
+    posicion = [0, 1]
+    tablero.colocar_pieza(pieza1, posicion)
+    assert (tablero.tablero == respuesta)
+    tablero.borrar_pieza(pieza2, posicion)
+    assert(tablero.tablero == respuesta)
+
+def test_decision_1_3():
+    tablero = Tablero(5,5)
+    respuesta = [[0, 1, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
+    pieza1 = [[1]]
+    pieza2 = [[0]]
+    posicion = [0, 1]
+    tablero.colocar_pieza(pieza1, posicion)
+    assert (tablero.tablero == respuesta)
+    tablero.colocar_pieza(pieza1, posicion)
+    assert(tablero.tablero == respuesta)
+    tablero.colocar_pieza(pieza2, posicion)
+    assert (tablero.tablero == respuesta)
+
 '''
     Test que comprueba loop simple
 '''
@@ -80,7 +137,9 @@ def test_looptesting_1():
     respuesta = [[0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0], [0, 0, 0, 0, 0]]
     pieza = [[0]]
     posicion = [0, 0]
-    tablero.borrar_pieza(pieza,posicion)
+    tablero.colocar_pieza(pieza, posicion)
+    assert (tablero.tablero == respuesta)
+    tablero.borrar_pieza(pieza, posicion)
     assert(tablero.tablero == respuesta)
 
 '''
